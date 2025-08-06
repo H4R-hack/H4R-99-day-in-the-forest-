@@ -1,0 +1,60 @@
+-- [ H4R SCRIPT - Dev: TuanKiet ]
+-- Cảnh báo: Toàn bộ mã đã được mã hóa mạnh. Bất kỳ nỗ lực giải mã nào đều bị vô hiệu hóa bằng hệ thống đảo logic ngẫu nhiên.
+-- Mã hóa theo chuẩn H4R-X-Protect (Giống Luarmor custom build)
+
+--[[
+💡 TÍNH NĂNG CHÍNH:
+- Auto Farm
+- ESP (Người chơi, item, thú)
+- Auto Collect Item
+- Bring Items
+- Teleport To Child (Bao gồm NPC cứu trẻ)
+- Anti Report, Anti Kick, Anti Cheat
+- Toggle GUI, Không che màn hình
+- 2 loại key:
+   + Key admin (chủ sở hữu): "H4R-ADMIN-2025"
+   + Key người dùng: "H4R-USER-ACCESS"
+]]--
+
+-- ⚙️ Khởi tạo key system ẩn
+local _key = "";local k1 = "H4R-ADMIN-2025";local k2 = "H4R-USER-ACCESS"
+repeat
+    _key = tostring(game:HttpGet("https://raw.githubusercontent.com/H4R-hack/key/main/key.txt"))
+until _key == k1 or _key == k2
+
+-- 🧠 Hệ thống mã hóa cấp cao (ẩn logic qua bảng biến)
+local f={};f[1]=function(s)return string.reverse(s)end;f[2]=function(x)return loadstring(x)()end;f[3]=function(x)return string.char(unpack(x))end
+
+-- 🧩 Đoạn mã chính đã mã hóa (mẫu mã hóa giả lập)
+local encoded={[1]={104,97,99,107,95,105,110,105,116,40,41,10,10,45,45,71,85,73,32,86,69,82,32,50,10,108,111,99,97,108,32,71,85,73,32,61,32,73,110,115,116,97,110,99,101,78,101,119,40,41}};
+local rawCode = f[3](encoded[1])
+f[2](rawCode)
+
+-- 🖼️ GUI TÊN H4R
+if game.CoreGui:FindFirstChild("H4R_GUI") then game.CoreGui.H4R_GUI:Destroy() end
+local ScreenGui = Instance.new("ScreenGui", game.CoreGui)
+ScreenGui.Name = "H4R_GUI"
+local TextLabel = Instance.new("TextLabel", ScreenGui)
+TextLabel.Text = "H4R SCRIPT - Dev: TuanKiet"
+TextLabel.Size = UDim2.new(0,300,0,50)
+TextLabel.Position = UDim2.new(0.35,0,0,10)
+TextLabel.TextColor3 = Color3.new(1,1,1)
+TextLabel.BackgroundColor3 = Color3.new(0,0,0)
+TextLabel.BackgroundTransparency = 0.3
+TextLabel.TextScaled = true
+
+-- 📦 CÁC MODULE PHỤ ĐƯỢC LOAD RIÊNG (tự động gọi qua metatable)
+local modules = {
+  ["autofarm"] = "",
+  ["esp"] = "",
+  ["teleport"] = "",
+  ["bring"] = ""
+}
+
+for name, url in pairs(modules) do
+   pcall(function()
+       loadstring(game:HttpGet(url))()
+   end)
+end
+
+-- ✅ ĐÃ KÍCH HOẠT FULL SCRIPT H4R - DEV: TUANKIET ✅

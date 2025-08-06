@@ -1,0 +1,61 @@
+--// AutoFarm Module - H4R Script (Dev: TuanKiet)
+--// Obfuscated logic removed for GitHub version
+
+local AutoFarm = {}
+
+-- Settings
+local Enabled = false
+local Distance = 50
+local Delay = 0.3
+
+-- Services
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local RunService = game:GetService("RunService")
+local TweenService = game:GetService("TweenService")
+
+-- Utils
+local function GetClosestMob()
+    local closest, dist = nil, math.huge
+    for _, mob in ipairs(workspace:GetDescendants()) do
+        if mob:FindFirstChild("Humanoid") and mob:FindFirstChild("HumanoidRootPart") then
+            local d = (mob.HumanoidRootPart.Position - LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+            if d < dist and d <= Distance then
+                dist = d
+                closest = mob
+            end
+        end
+    end
+    return closest
+end
+
+local function Attack(mob)
+    local tool = LocalPlayer.Character:FindFirstChildOfClass("Tool")
+    if tool and mob and mob:FindFirstChild("Humanoid") then
+        -- Simulate clicking or use RemoteEvent
+        tool:Activate()
+    end
+end
+
+function AutoFarm:Toggle(bool)
+    Enabled = bool
+    if Enabled then
+        print("[AutoFarm] Started")
+    else
+        print("[AutoFarm] Stopped")
+    end
+end
+
+RunService.Heartbeat:Connect(function()
+    if not Enabled or not LocalPlayer.Character then return end
+    local mob = GetClosestMob()
+    if mob then
+        pcall(function()
+            LocalPlayer.Character:MoveTo(mob.HumanoidRootPart.Position + Vector3.new(0, 2, 0))
+            Attack(mob)
+            task.wait(Delay)
+        end)
+    end
+end)
+
+return AutoFarm
