@@ -19,7 +19,7 @@
 -- ⚙️ Khởi tạo key system ẩn
 local _key = "";local k1 = "H4R-ADMIN-2025";local k2 = "H4R-USER-ACCESS"
 repeat
-    _key = tostring(game:HttpGet("https://raw.githubusercontent.com/H4R-hack/key/main/key.txt"))
+    _key = tostring(game:HttpGet("https://raw.githubusercontent.com/H4R-hack/H4R-99-day-in-the-forest-/refs/heads/main/main%20key"))
 until _key == k1 or _key == k2
 
 -- 🧠 Hệ thống mã hóa cấp cao (ẩn logic qua bảng biến)
@@ -59,6 +59,7 @@ for name, url in pairs(modules) do
 end
 
 -- ✅ ĐÃ KÍCH HOẠT FULL SCRIPT H4R - DEV: TUANKIET ✅
+
 
 
 
