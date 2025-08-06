@@ -1,0 +1,40 @@
+--// H4R Script - Kill Aura Module
+--// Dev: TuanKiet
+
+local KillAura = {}
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local LocalPlayer = Players.LocalPlayer
+local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+
+-- Cấu hình
+KillAura.Enabled = true
+KillAura.Range = 20 -- Phạm vi kill aura
+
+-- Hàm phát hiện và đánh NPC gần
+function KillAura:AttackNearby()
+    if not self.Enabled then return end
+
+    local hrp = Character:FindFirstChild("HumanoidRootPart")
+    if not hrp then return end
+
+    for _, enemy in pairs(workspace:GetDescendants()) do
+        if enemy:IsA("Model") and enemy ~= Character and enemy:FindFirstChild("Humanoid") and enemy:FindFirstChild("HumanoidRootPart") then
+            local dist = (hrp.Position - enemy.HumanoidRootPart.Position).Magnitude
+            if dist <= self.Range and enemy.Humanoid.Health > 0 then
+                -- Giả lập tấn công (nếu game có hệ thống combat riêng, thay thế đoạn này)
+                enemy.Humanoid:TakeDamage(20) -- Gây 20 sát thương mỗi lần
+            end
+        end
+    end
+end
+
+-- Kích hoạt tự động
+RunService.Heartbeat:Connect(function()
+    pcall(function()
+        KillAura:AttackNearby()
+    end)
+end)
+
+return KillAura
