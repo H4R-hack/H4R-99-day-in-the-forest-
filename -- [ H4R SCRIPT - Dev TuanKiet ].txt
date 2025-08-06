@@ -45,7 +45,7 @@ TextLabel.TextScaled = true
 
 -- 📦 CÁC MODULE PHỤ ĐƯỢC LOAD RIÊNG (tự động gọi qua metatable)
 local modules = {
-  ["autofarm"] = "",
+  ["autofarm"] = "https://raw.githubusercontent.com/H4R-hack/H4R-99-day-in-the-forest-/refs/heads/main/100.txt",
   ["esp"] = "",
   ["teleport"] = "",
   ["bring"] = ""
@@ -58,3 +58,4 @@ for name, url in pairs(modules) do
 end
 
 -- ✅ ĐÃ KÍCH HOẠT FULL SCRIPT H4R - DEV: TUANKIET ✅
+
