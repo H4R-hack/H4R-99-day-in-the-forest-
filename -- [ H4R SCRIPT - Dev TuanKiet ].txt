@@ -49,7 +49,7 @@ local modules = {
   ["esp"] = "https://raw.githubusercontent.com/H4R-hack/H4R-99-day-in-the-forest-/refs/heads/main/199",
   ["teleport"] = "https://raw.githubusercontent.com/H4R-hack/H4R-99-day-in-the-forest-/refs/heads/main/1002",
   ["bring"] = "https://raw.githubusercontent.com/H4R-hack/H4R-99-day-in-the-forest-/refs/heads/main/10"
-  ["bring"] = ""
+  ["killaura"] = "https://raw.githubusercontent.com/H4R-hack/H4R-99-day-in-the-forest-/refs/heads/main/bring%20item"
 }
 
 for name, url in pairs(modules) do
@@ -59,6 +59,7 @@ for name, url in pairs(modules) do
 end
 
 -- ✅ ĐÃ KÍCH HOẠT FULL SCRIPT H4R - DEV: TUANKIET ✅
+
 
 
 
