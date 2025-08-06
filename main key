@@ -1,0 +1,62 @@
+-- H4R SCRIPT - Dev: TuanKiet
+-- Key System with Dual Keys (Dev + User)
+
+local _key = ""
+local k1 = "D2C1001422FAOPEAY_0WTS-1WEQ_88HIQDEVHID" -- Dev Key
+local k2 = "1TSJAT108SDTAK12752THAY3KAHSRAJST8103444ASFDJSF" -- User Key
+
+-- GUI Setup
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+local gui = Instance.new("ScreenGui", playerGui)
+gui.Name = "KeySystem"
+
+local frame = Instance.new("Frame", gui)
+frame.Position = UDim2.new(0.35, 0, 0.4, 0)
+frame.Size = UDim2.new(0, 300, 0, 150)
+frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+frame.BorderSizePixel = 0
+
+local title = Instance.new("TextLabel", frame)
+title.Size = UDim2.new(1, 0, 0, 40)
+title.Text = "[ H4R Script - Key Access ]"
+title.TextColor3 = Color3.new(1, 1, 1)
+title.BackgroundTransparency = 1
+title.Font = Enum.Font.SourceSansBold
+title.TextScaled = true
+
+local box = Instance.new("TextBox", frame)
+box.Position = UDim2.new(0.1, 0, 0.4, 0)
+box.Size = UDim2.new(0.8, 0, 0, 30)
+box.PlaceholderText = "Nhập key tại đây"
+box.Text = ""
+box.Font = Enum.Font.SourceSans
+box.TextColor3 = Color3.new(1, 1, 1)
+box.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+
+local btn = Instance.new("TextButton", frame)
+btn.Position = UDim2.new(0.25, 0, 0.7, 0)
+btn.Size = UDim2.new(0.5, 0, 0, 30)
+btn.Text = "Xác nhận"
+btn.Font = Enum.Font.SourceSansBold
+btn.TextColor3 = Color3.new(1, 1, 1)
+btn.BackgroundColor3 = Color3.fromRGB(100, 0, 0)
+
+local function validateKey(key)
+    return key == k1 or key == k2
+end
+
+btn.MouseButton1Click:Connect(function()
+    _key = box.Text
+    if validateKey(_key) then
+        gui:Destroy()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/H4R-hack/H4R-99-day-in-the-forest-/main/main-script.txt"))()
+    else
+        box.Text = "Sai key rồi!"
+    end
+end)
+
+-- Script được bảo vệ bởi hệ thống key gồm 2 mã
+-- Dev: TuanKiet | H4R Script
