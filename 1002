@@ -1,0 +1,47 @@
+--// H4R Script - Teleport Module
+--// Dev: TuanKiet
+
+local Teleport = {}
+
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+-- Hàm dịch chuyển tới một vị trí nhất định (Vector3)
+function Teleport:ToPosition(position)
+    if not LocalPlayer.Character or not LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then return end
+    LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(position)
+end
+
+-- Hàm dịch chuyển tới một "child" cụ thể trong workspace (tên hoặc instance)
+function Teleport:ToChild(nameOrInstance)
+    local target
+    if typeof(nameOrInstance) == "string" then
+        target = workspace:FindFirstChild(nameOrInstance, true)
+    elseif typeof(nameOrInstance) == "Instance" then
+        target = nameOrInstance
+    end
+
+    if target and target:IsA("BasePart") then
+        self:ToPosition(target.Position)
+    elseif target and target:IsA("Model") and target:FindFirstChild("HumanoidRootPart") then
+        self:ToPosition(target.HumanoidRootPart.Position)
+    end
+end
+
+-- Ví dụ điểm đến cụ thể
+Teleport.PredefinedLocations = {
+    ["Campfire"] = Vector3.new(125, 10, -300),
+    ["Cave"] = Vector3.new(1000, 15, -500),
+    ["Cabin"] = Vector3.new(-800, 12, 350),
+    ["BossZone"] = Vector3.new(1700, 20, -850),
+}
+
+-- Dịch chuyển đến vị trí từ danh sách có sẵn
+function Teleport:ToNamedLocation(name)
+    local pos = self.PredefinedLocations[name]
+    if pos then
+        self:ToPosition(pos)
+    end
+end
+
+return Teleport
