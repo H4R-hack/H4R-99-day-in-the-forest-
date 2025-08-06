@@ -1,0 +1,58 @@
+--// H4R Script - Bring Item Module
+--// Dev: TuanKiet
+
+local Bring = {}
+
+local Players = game:GetService("Players")
+local Workspace = game:GetService("Workspace")
+local LocalPlayer = Players.LocalPlayer
+
+-- Danh sách các item phổ biến trong game 99 Nights in the Forest (Snow Biome)
+Bring.ItemList = {
+    "Axe",
+    "Pickaxe",
+    "Torch",
+    "Flashlight",
+    "Stone",
+    "Wood",
+    "Berry",
+    "Fish",
+    "Cooked Fish",
+    "Campfire",
+    "Tent",
+    "Spear",
+    "Bow",
+    "Arrow",
+    "Mushroom",
+    "Health Potion",
+    "Snowball",
+    "Bear Fur",
+    "Ice Crystal",
+    "Relic",
+    "Snow Coat",
+    "Wrench",
+    "Fuel",
+    "Battery",
+    "Map",
+    "Compass",
+    "Firewood",
+    "Deer Antler"
+}
+
+-- Hàm chính: dịch chuyển item đến người chơi
+function Bring:BringItem(itemName)
+    for _, v in pairs(Workspace:GetDescendants()) do
+        if v:IsA("BasePart") and v.Name == itemName then
+            v.CFrame = LocalPlayer.Character.HumanoidRootPart.CFrame + Vector3.new(0, 3, 0)
+        end
+    end
+end
+
+-- Hàm gọi tất cả item trong danh sách đến người chơi
+function Bring:BringAll()
+    for _, itemName in pairs(self.ItemList) do
+        self:BringItem(itemName)
+    end
+end
+
+return Bring
